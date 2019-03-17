@@ -9,5 +9,5 @@ public interface PostDao {
 
     List<Object> newPosts();
 
-    List<Object> hotPost();
+    List<Object> hotPosts();
 }

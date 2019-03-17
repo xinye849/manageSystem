@@ -21,8 +21,7 @@ public class Post implements Serializable {
     private String content;
     @Column(name = "publishTime")
     private String publishTime;
-    @Column(name = "type")
-    private int type;
+
     @Column(name = "pageview")
     private int pageview;
     @Column(name = "operator")
@@ -61,13 +60,7 @@ public class Post implements Serializable {
         this.publishTime = publishTime;
     }
 
-    public int getType() {
-        return type;
-    }
 
-    public void setType(int type) {
-        this.type = type;
-    }
 
     public int getPageview() {
         return pageview;
@@ -92,7 +85,7 @@ public class Post implements Serializable {
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", publishTime='" + publishTime + '\'' +
-                ", type=" + type +
+
                 ", pageview=" + pageview +
                 ", operator=" + operator +
                 '}';

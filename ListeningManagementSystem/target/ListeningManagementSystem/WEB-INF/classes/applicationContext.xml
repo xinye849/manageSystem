@@ -38,7 +38,11 @@
 
     <bean id="postAction" class="xin.yuan.action.PostAction">
         <property name="postService" ref="postService"></property>
+        <property name="noticeService" ref="noticeService"></property>
+    </bean>
 
+    <bean id="noticesAction" class="xin.yuan.action.NoticesAction">
+        <property name="noticeService" ref="noticeService"></property>
     </bean>
 
 
@@ -70,6 +74,10 @@
         <property name="postDao" ref="postDao"></property>
     </bean>
 
+    <bean id="noticeService" class="xin.yuan.service.impl.NoticeServiceImpl">
+        <property name="noticeDao" ref="noticeDao"></property>
+    </bean>
+
     <!--dao依赖-->
     <bean id="stuDao" class="xin.yuan.dao.impl.StuDaoImpl">
         <property name="sessionFactory" ref="sessionFactory"></property>
@@ -94,6 +102,10 @@
     </bean>
 
     <bean id="postDao" class="xin.yuan.dao.impl.PostDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+
+    <bean id="noticeDao" class="xin.yuan.dao.impl.NoticeDaoImpl">
         <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
     <!--factory注入-->

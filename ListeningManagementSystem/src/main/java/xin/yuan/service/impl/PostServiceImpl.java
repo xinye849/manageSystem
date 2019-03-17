@@ -18,6 +18,7 @@ public class PostServiceImpl implements PostService {
         this.postDao = postDao;
     }
 
+
     @Override
     public int addPost(Post post) {
 
@@ -25,16 +26,18 @@ public class PostServiceImpl implements PostService {
         return postDao.addPost(post);
     }
 
+
     @Override
     public List<Object> newPosts() {
 
         return postDao.newPosts();
     }
 
+
     @Override
     public List<Object> hotPosts() {
 
-        return postDao.hotPost();
+        return postDao.hotPosts();
     }
 
 

@@ -22,4 +22,17 @@ public class NoticeServiceImpl implements NoticeService {
     {
         return noticeDao.newNotice();
     }
+
+    @Override
+    public List<Object> allNotice() {
+
+
+        return noticeDao.allNotice();
+    }
+
+    @Override
+    public List<Object> getPost(int id) {
+
+        return noticeDao.getPost(id);
+    }
 }

@@ -8,12 +8,10 @@ import xin.yuan.entity.Post;
 import xin.yuan.service.NoticeService;
 import xin.yuan.service.PostService;
 
-import javax.servlet.ServletContext;
+
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * @authorknightx
@@ -48,10 +46,11 @@ public class PostAction extends ActionSupport implements ModelDriven {
 //添加帖子
     public String addPost(){
         Map<String,Object> map = new HashMap<String, Object>();
-
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        post.setPublishTime(sdf.format(new Date()));
         int result = postService.addPost(post);
 
-        if(result == 1) {
+        if(result >= 1) {
             map.put("result", "success");
         }else {
             map.put("result", "false");

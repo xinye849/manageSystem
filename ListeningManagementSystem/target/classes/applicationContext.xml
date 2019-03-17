@@ -39,7 +39,10 @@
     <bean id="postAction" class="xin.yuan.action.PostAction">
         <property name="postService" ref="postService"></property>
         <property name="noticeService" ref="noticeService"></property>
+    </bean>
 
+    <bean id="noticesAction" class="xin.yuan.action.NoticesAction">
+        <property name="noticeService" ref="noticeService"></property>
     </bean>
 
 

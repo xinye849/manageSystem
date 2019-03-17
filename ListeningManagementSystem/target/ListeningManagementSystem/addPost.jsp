@@ -1,25 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page isELIgnored="false" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--<%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-%>--%>
-<%--<%
-	response.setContentType("text/html;charset=UTF-8");
 
-	String userID = request.getParameter("userID");
-	request.setCharacterEncoding("UTF-8");
-%>--%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<%--<base href="<%=basePath%>">--%>
-
-<title>My JSP 'addPost.jsp' starting page</title>
-
+<title>发帖子</title>
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
@@ -31,13 +17,21 @@
 <script type="text/javascript">
 	// 提交数据
 	function add() {
-		$.post('${pageContext.request.contextPath}/addPost',{"operator":${existUser.stuId},"postTitle":$("#title").val(),"postContent":$("#commentText").val(),"postType" : $("#sel").val()},
-		function (data) {
+		if ($.trim($('#title').val()) === "" || $.trim($('#title').val()) == null) {
+			alert("请输入标题");
+			return false;
+		}
+		if ($.trim($('#commentText').val()) === "" || $.trim($('#commentText').val()) == null) {
+			alert("请输入内容");
+			return false;
+		}
+		$.post('${pageContext.request.contextPath}/addPost',{"operator":${existUser.stuId},"title":$('#title').val(),"content":$('#commentText').val(),"type" : $('#sel').val()},
+				function (data) {
 
 			var res = JSON.parse(data).result;
 			if(res == "success") {
 				alert("发表成功!!!");
-				window.location.href = "ThemeServlet";
+				window.location.href = "${pageContext.request.contextPath}/theme";
 			}else {
 				alert("发表失败...");
 			}
@@ -152,6 +146,3 @@ body {
 				</div>
 			</div>
 		</div>
-	</div>
-</body>
-</html>

@@ -146,7 +146,7 @@ public class StuAction extends ActionSupport implements ModelDriven {
         String color = ServletActionContext.getRequest().getParameter("color"); // 字体颜色
         String content = ServletActionContext.getRequest().getParameter("content"); // 发言内容
         // 发言时间 使用SimpleDateFormat
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String sendTime = sdf.format(new Date()); // 发言时间
         // 获得ServletContext对象.
         ServletContext application = ServletActionContext.getServletContext();

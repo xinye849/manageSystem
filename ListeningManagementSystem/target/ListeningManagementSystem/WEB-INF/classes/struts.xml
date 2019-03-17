@@ -153,9 +153,20 @@
     <action name="exit" class="stuAction" method="exit">
         <result name="success">/stuHomePage.jsp</result>
     </action>
-
+<!--帖子模块-->
     <action name="addPostUI" class="postAction" method="addPostUI">
         <result name="success">/addPost.jsp</result>
+    </action>
+    <action name="addPost" class="postAction" method="addPost">
+    </action>
+
+    <action name="theme" class="postAction" method="theme">
+        <result name="success">/themes.jsp</result>
+    </action>
+
+    <action name="noticesAll" class="noticesAction" method="noticesAll">
+        <result name="noId">/noticesList.jsp</result>
+        <result name="success">/noticeDetail.jsp</result>
     </action>
 
 
@@ -185,6 +196,7 @@
             <param name="root">stuObj</param>
         </result>
     </action>
+
 
     <action name="findStudentListensByClassRoom" class="listenAction" method="findStudentListensByClassRoom">
         <result name="success" type="json">
