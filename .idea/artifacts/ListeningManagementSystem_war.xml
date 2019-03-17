@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="ListeningManagementSystem:war">
+    <output-path>$PROJECT_DIR$/ListeningManagementSystem/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>ListeningManagementSystem</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="ListeningManagementSystem.war">
+      <element id="artifact" artifact-name="ListeningManagementSystem:war exploded" />
+    </root>
+  </artifact>
+</component>

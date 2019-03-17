@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/tx
+            http://www.springframework.org/schema/tx/spring-tx.xsd
+            http://www.springframework.org/schema/aop
+            http://www.springframework.org/schema/aop/spring-aop.xsd ">
+
+<!--action依赖-->
+   <bean id="stuAction" class="xin.yuan.action.StuAction">
+       <property name="stuService" ref="stuService"></property>
+   </bean>
+
+    <bean id="teaAction" class="xin.yuan.action.TeaAction">
+        <property name="teaService" ref="teaService"></property>
+    </bean>
+
+    <bean id="adminAction" class="xin.yuan.action.AdminAction">
+        <property name="adminService" ref="adminService"></property>
+    </bean>
+
+    <bean id="messageAction" class="xin.yuan.action.MessageAction">
+        <property name="messageService" ref="messageService"></property>
+    </bean>
+
+    <bean id="listenAction" class="xin.yuan.action.ListenAction">
+        <property name="listenClassService" ref="listenClassService"></property>
+    </bean>
+
+    <bean id="responseAction" class="xin.yuan.action.ResponseAction">
+        <property name="responseService" ref="responseService"></property>
+    </bean>
+
+    <bean id="postAction" class="xin.yuan.action.PostAction">
+        <property name="postService" ref="postService"></property>
+        <property name="noticeService" ref="noticeService"></property>
+
+    </bean>
+
+
+
+    <!--service依赖-->
+
+    <bean id="stuService" class="xin.yuan.service.impl.StuServiceImpl">
+        <property name="stuDao" ref="stuDao"></property>
+    </bean>
+    <bean id="teaService" class="xin.yuan.service.impl.TeaServiceImpl">
+        <property name="teaDao" ref="teaDao"></property>
+    </bean>
+    <bean id="adminService" class="xin.yuan.service.impl.AdminServiceImpl">
+        <property name="adminDao" ref="adminDao"></property>
+    </bean>
+    <bean id="messageService" class="xin.yuan.service.impl.MessageServiceImpl">
+        <property name="messageDao" ref="messageDao"></property>
+    </bean>
+
+    <bean id="listenClassService" class="xin.yuan.service.impl.ListenClassServiceImpl">
+        <property name="listenClassDao" ref="listenClassDao"></property>
+    </bean>
+
+    <bean id="responseService" class="xin.yuan.service.impl.ResponseServiceImpl">
+        <property name="responseDao" ref="responseDao"></property>
+    </bean>
+
+    <bean id="postService" class="xin.yuan.service.impl.PostServiceImpl">
+        <property name="postDao" ref="postDao"></property>
+    </bean>
+
+    <bean id="noticeService" class="xin.yuan.service.impl.NoticeServiceImpl">
+        <property name="noticeDao" ref="noticeDao"></property>
+    </bean>
+
+    <!--dao依赖-->
+    <bean id="stuDao" class="xin.yuan.dao.impl.StuDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <bean id="teaDao" class="xin.yuan.dao.impl.TeaDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+
+    <bean id="adminDao" class="xin.yuan.dao.impl.AdminDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <bean id="messageDao" class="xin.yuan.dao.impl.MessageDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+
+    <bean id="listenClassDao" class="xin.yuan.dao.impl.ListenClassDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+
+    <bean id="responseDao" class="xin.yuan.dao.impl.ResponseDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+
+    <bean id="postDao" class="xin.yuan.dao.impl.PostDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+
+    <bean id="noticeDao" class="xin.yuan.dao.impl.NoticeDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <!--factory注入-->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"></property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+                <prop key="hibernate.format_sql">true</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+
+
+
+
+            </props>
+        </property>
+        <!--实体映射-->
+        <property name="packagesToScan" value="xin.yuan.entity"></property>
+
+
+
+
+
+    </bean>
+
+
+
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="com.mysql.jdbc.Driver"></property>
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/LMS_db"></property>
+        <property name="user" value="root"></property>
+        <property name="password" value="xin123456"></property>
+    </bean>
+
+
+
+    <!--事物处理-->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+
+<tx:advice id="txAdvice" transaction-manager="transactionManager">
+
+<tx:attributes>
+    <tx:method name="*" propagation="REQUIRED" read-only="false"/>
+    <tx:method name="find*" propagation="SUPPORTS" read-only="true"/>
+</tx:attributes>
+</tx:advice>
+    
+    <aop:config>
+        <aop:pointcut id="pt1" expression="execution(* xin.yuan.service.impl.*.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="pt1"/>
+        
+        
+    </aop:config>
+
+
+
+
+</beans>

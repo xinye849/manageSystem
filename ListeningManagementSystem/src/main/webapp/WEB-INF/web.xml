@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+
+
+
+  <!--虽然监听器默认只能加载WEB-INF下的spring配置文件，但是，我们可以手动指定spring配置文件的位置，让监听器来读配置-->
+  <context-param>
+    <param-name>contextConfigLocation</param-name><!--这个名字是位置的键名，必须这样写-->
+    <param-value>classpath:applicationContext.xml</param-value><!--把spring配置文件指定在类路径下-->
+  </context-param>
+
+
+
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+
+  </listener>
+
+
+
+<listener>
+    <listener-class>xin.yuan.listener.ApplicationListener</listener-class>
+</listener>
+
+
+
+
+
+  <filter>
+    <filter-name>Encode</filter-name>
+    <filter-class>xin.yuan.Filters.Encode</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>Encode</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+
+
+
+
+
+
+
+  <filter>
+    <filter-name>FilterAll</filter-name>
+    <filter-class>xin.yuan.Filters.FilterAll</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>FilterAll</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <filter>
+    <filter-name>struts2</filter-name>
+    <filter-class>org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>struts2</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+
+
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+
+
+
+</web-app>

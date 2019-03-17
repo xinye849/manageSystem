@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+
+
+    <!--开启开发者模式（在不需要重启服务器的情况下更新配置文件）-->
+    <constant name="struts.devMode" value="true"></constant>
+
+    <constant name="struts.enable.DynamicMethodInvocation" value="true" />
+    <!--允许ognl访问静态方法-->
+    <constant name="struts.ognl.allowStaticMethodAccess" value="true"/>
+
+
+<package name="p1" namespace="/" extends="struts-default">
+    <!--学生登录-->
+    <action name="stuLogin" class="stuAction" method="stuLogin">
+
+        <result name="success" type="redirect" >/stuHomePage.jsp</result>
+        <result name="error" >/index.jsp</result>
+    </action>
+    <!--学生退出-->
+    <action name="stuLogOut" class="stuAction" method="stuLogOut">
+        <result name="success" type="redirect">/index.jsp</result>
+    </action>
+
+    <!--教师登录-->
+    <action name="teaLogin" class="teaAction" method="teaLogin">
+
+        <result name="success" type="redirect">/teaHomePage.jsp</result>
+        <result name="error" >/index.jsp</result>
+    </action>
+    <!--教师退出-->
+    <action name="teaLogOut" class="teaAction" method="teaLogOut">
+        <result name="success" type="redirect">/index.jsp</result>
+    </action>
+
+    <action name="findTeacherWithOne" class="teaAction" method="findTeacherWithOne">
+
+    </action>
+
+
+    <!--管理员登录-->
+    <action name="adminLogin" class="adminAction" method="adminLogin">
+        <result name="success" type="redirect">/adminHomePage.jsp</result>
+        <result name="error">/index.jsp</result>
+    </action>
+
+    <!--管理员退出-->
+    <action name="admLogOut" class="adminAction" method="admLogOut">
+        <result name="success" type="redirect">/index.jsp</result>
+    </action>
+
+    <action name="findTeacherWithPage" class="teaAction" method="findTeachersWithPage">
+        <result name="success" >/teaManage.jsp</result>
+    </action>
+
+    <action name="findMessageWithPage" class="messageAction" method="findMessageWithPage">
+        <result name="success" >/messageAll.jsp</result>
+    </action>
+
+<action name="addMessageUI" class="messageAction" method="addMessageUI">
+    <result name="success">/messageAdd.jsp</result>
+</action>
+
+<action name="addMessage" class="messageAction" method="addMessage">
+    <result name="success" type="redirectAction" >/findMessageWithPage?num=1</result>
+</action>
+    <action name="addTeacherUI" class="teaAction" method="addTeacherUI">
+        <result name="success">/teaAdd.jsp</result>
+    </action>
+
+    <action name="addTeacher" class="teaAction" method="addTeacher">
+        <result name="success" type="redirectAction">/findTeacherWithPage?num=1</result>
+        <result name="error" >/teaAdd.jsp</result>
+    </action>
+
+    <action name="delTeacherById" class="teaAction" method="delTeacherById">
+        <result name="success" type="redirectAction">/findTeacherWithPage?num=1</result>
+    </action>
+
+    <action name="findMessageWithPageByTeacher" class="messageAction" method="findMessageWithPageByTeacher">
+        <result name="success" >/messageManage.jsp</result>
+    </action>
+
+    <action name="replayUI" class="messageAction" method="replayUI">
+        <result name="success">/messageReplay.jsp</result>
+    </action>
+
+    <action name="replayMessage" class="messageAction" method="replayMessage">
+    <result name="success" type="redirectAction">/findMessageWithPageByTeacher?num=1</result>
+    </action>
+
+    <action name="findInfoUI" class="teaAction" method="findInfoUI">
+        <result name="success">/teacherInfo.jsp</result>
+    </action>
+
+    <action name="updateTeacher" class="teaAction" method="updateTeacher">
+        <result name="success">/teacherInfo.jsp</result>
+    </action>
+
+
+    <action name="addListenClassUI" class="listenAction" method="addListenClassUI">
+        <result name="success">/listenClass/addListenClass.jsp</result>
+    </action>
+    <action name="addListenClass" class="listenAction" method="addListenClass">
+        <result name="success">/listenClass/addListenClass.jsp</result>
+    </action>
+
+    <action name="updateAdmin" class="adminAction" method="updateAdmin">
+        <result name="success">/adminHomePage.jsp</result>
+    </action>
+
+
+    <action name="updateStudent" class="stuAction" method="updateStudent">
+        <result name="success">/stuHomePage.jsp</result>
+    </action>
+
+    <!--课后问题交流论坛-->
+    <action name="findAllMessages" class="messageAction" method="findAllMessages">
+        <result name="success">/messageAll.jsp</result>
+    </action>
+
+    <!--根据ID进行的交流回复-->
+    <action name="responseByIdUI" class="responseAction" method="responseByIdUI">
+        <result name="success">/forum.jsp</result>
+    </action>
+
+    <!--添加论坛评论留言-->
+    <action name="addForumMessage" class="responseAction" method="addForumMessage">
+        <result name="success">/forum.jsp</result>
+    </action>
+
+    <action name="chatRoomUI" class="stuAction" method="chatRoomUI">
+        <result name="success">/main.jsp</result>
+    </action>
+
+    <action name="onlineUI" class="stuAction" method="onlineUI">
+        <result name="success">/online.jsp</result>
+    </action>
+
+    <action name="getMessage" class="stuAction" method="getMessage">
+
+    </action>
+
+    <action name="sendMessage" class="stuAction" method="sendMessage">
+
+    </action>
+    
+    <action name="exit" class="stuAction" method="exit">
+        <result name="success">/stuHomePage.jsp</result>
+    </action>
+<!--帖子模块-->
+    <action name="addPostUI" class="postAction" method="addPostUI">
+        <result name="success">/addPost.jsp</result>
+    </action>
+    <action name="addPost" class="postAction" method="addPost">
+
+    </action>
+
+
+</package>
+
+<package name="myJson" namespace="/" extends="struts-default,json-default">
+    <action name="findAllTeacher" class="teaAction" method="findAllTeacher">
+        <result name="success" type="json">
+            <param name="root">teacherList</param>
+        </result>
+    </action>
+
+    <action name="findTeacherListens" class="listenAction" method="findTeacherListensByName">
+        <result name="success" type="json">
+            <param name="root">listenList</param>
+        </result>
+    </action>
+
+    <action name="findAdminByID" class="adminAction" method="findAdminByID">
+        <result name="success" type="json">
+            <param name="root">adminObj</param>
+        </result>
+    </action>
+
+    <action name="findStudentByID" class="stuAction" method="findStudentByID">
+        <result name="success" type="json">
+            <param name="root">stuObj</param>
+        </result>
+    </action>
+
+    <action name="findStudentListensByClassRoom" class="listenAction" method="findStudentListensByClassRoom">
+        <result name="success" type="json">
+            <param name="root">listenList</param>
+        </result>
+    </action>
+
+
+</package>
+
+
+
+
+
+</struts>
