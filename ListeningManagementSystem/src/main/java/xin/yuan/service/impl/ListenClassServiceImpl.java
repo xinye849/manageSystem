@@ -40,4 +40,9 @@ public class ListenClassServiceImpl implements ListenClassService {
 
         return listenClassDao.findStudentListensByClassRoom(classRoom);
     }
+
+    @Override
+    public List<ListenClass> findTeacherListensByName2(String teaName) {
+        return listenClassDao.findTeacherListensByName2(teaName);
+    }
 }

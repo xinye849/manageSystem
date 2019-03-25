@@ -18,4 +18,8 @@ public interface StuDao {
     Student findStudentByID(Student student);
 
     void updateStudent(Student student);
+
+    Student findStudentWithOne(Student student);
+
+    void addStudent(Student student);
 }

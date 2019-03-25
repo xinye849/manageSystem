@@ -14,7 +14,10 @@ import xin.yuan.utils.PageModel;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @authorknightx
@@ -45,30 +48,29 @@ public class TeaAction extends ActionSupport implements ModelDriven {
     }
 
 
-
-
-
-
-    public String teaLogin(){
+    public String teaLogin() {
         Teacher tea = teaService.teaLogin(teacher);
-
-        if(tea==null){
-
+        if (tea == null) {
             HttpServletRequest request = ServletActionContext.getRequest();
-            request.setAttribute("msg","用户名或密码错误，请重新登录");
-
+            request.setAttribute("msg", "用户名或密码错误，请重新登录");
             return ERROR;
-        }else {
-            ServletActionContext.getRequest().getSession().removeAttribute("existUser");
-            HttpSession session = ServletActionContext.getRequest().getSession();
-            session.setAttribute("existUser",tea);
+        } else {
+            if ("0".equals(tea.getTeaStatus())) {
+                ServletActionContext.getRequest().getSession().removeAttribute("existUser");
+                HttpSession session = ServletActionContext.getRequest().getSession();
+                session.setAttribute("existUser", tea);
+                return SUCCESS;
 
+            } else {
+                HttpServletRequest request = ServletActionContext.getRequest();
+                request.setAttribute("msg", "你的账户已被冻结，请联系管理员");
+                return ERROR;
+            }
         }
-        return SUCCESS;
     }
 
     //教师退出
-    public String teaLogOut(){
+    public String teaLogOut() {
 
         HttpSession session = ServletActionContext.getRequest().getSession();
         /*session.invalidate();//session失效*/
@@ -77,46 +79,48 @@ public class TeaAction extends ActionSupport implements ModelDriven {
         return SUCCESS;
     }
 
-//分页查看教师
-    public String findTeachersWithPage(){
+    //分页查看教师
+    public String findTeachersWithPage() {
         HttpServletRequest request = ServletActionContext.getRequest();
         //拿到当前页
-       int currentNum = Integer.parseInt(request.getParameter("num"));
+        int currentNum = Integer.parseInt(request.getParameter("num"));
 
 
-       PageModel pm = teaService.findTeachersWithPage(currentNum);
-       request.setAttribute("pageModel",pm);
-
-
-
-        return SUCCESS;
-    }
-//页面空跳转
-    public String addTeacherUI(){
+        PageModel pm = teaService.findTeachersWithPage(currentNum);
+        request.setAttribute("pageModel", pm);
 
 
         return SUCCESS;
     }
+
+    //页面空跳转
+    public String addTeacherUI() {
+
+
+        return SUCCESS;
+    }
+
     //添加老师
-    public String addTeacher(){
+    public String addTeacher() {
 
 
         Teacher tea = teaService.findTeacherWithOne(teacher);
 
-        if(tea==null){
+        if (tea == null) {
 
             teaService.addTeacher(teacher);
 
             return SUCCESS;
-        }else {
+        } else {
             HttpServletRequest request = ServletActionContext.getRequest();
-            request.setAttribute("msg","这个账号已经存在了，请重新添加");
+            request.setAttribute("msg", "这个账号已经存在了，请重新添加");
         }
         return ERROR;
 
     }
-//根据账户查看信息
-    public String findTeacherWithOne(){
+
+    //根据账户查看信息
+    public String findTeacherWithOne() {
 
         Teacher tea = teaService.findTeacherWithOne(teacher);
         JSONObject jsonObject = JSONObject.fromObject(tea);
@@ -130,31 +134,46 @@ public class TeaAction extends ActionSupport implements ModelDriven {
     }
 
 
-    public String delTeacherById(){
+    public String delTeacherById() {
         teaService.delTeacherById(teacher);
 
         return SUCCESS;
 
     }
 
-    public String findInfoUI(){
+    public String changeStatus() throws IOException {
+        String status = teaService.changeStatus(teacher);
+
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("status", status);
+        JSONObject jsonObject = JSONObject.fromObject(map);
+        PrintWriter out = ServletActionContext.getResponse().getWriter();
+        out.println(jsonObject.toString());
+        out.flush();
+        out.close();
+
+        return SUCCESS;
+
+    }
+
+
+    public String findInfoUI() {
 
 
         return SUCCESS;
     }
 
-    public String updateTeacher(){
+    public String updateTeacher() {
         teaService.updateTeacher(teacher);
-        ServletActionContext.getRequest().setAttribute("msg","修改成功");
-
+        ServletActionContext.getRequest().setAttribute("msg", "修改成功");
 
 
         return SUCCESS;
     }
 
     //查询所有教师
-    public String findAllTeacher(){
-        JSONArray jsonArray = JSONArray.fromObject((List<Teacher>)teaService.findAllTeacher());
+    public String findAllTeacher() {
+        JSONArray jsonArray = JSONArray.fromObject((List<Teacher>) teaService.findAllTeacher());
         teacherList = jsonArray.toString();
 
 

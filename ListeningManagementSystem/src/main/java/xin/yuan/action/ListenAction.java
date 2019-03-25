@@ -58,12 +58,21 @@ public class ListenAction extends ActionSupport implements ModelDriven {
 
         return SUCCESS;
     }
-//查看老师听课信息
+//查看老师讲课信息
     public String findTeacherListensByName(){
         HttpServletRequest request = ServletActionContext.getRequest();
         String teaName = request.getParameter("teaName");
         JSONArray jsonArray = JSONArray.fromObject((List<ListenClass>)listenClassService.findTeacherListensByName(teaName));
        listenList = jsonArray.toString();
+        return SUCCESS;
+    }
+
+    //查看老师听课信息
+    public String findTeacherListensByName2(){
+        HttpServletRequest request = ServletActionContext.getRequest();
+        String teaName = request.getParameter("teaName");
+        JSONArray jsonArray = JSONArray.fromObject((List<ListenClass>)listenClassService.findTeacherListensByName2(teaName));
+        listenList = jsonArray.toString();
         return SUCCESS;
     }
 

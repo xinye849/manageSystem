@@ -114,7 +114,7 @@
             while(!reg.test(this.value)){
 
 
-                layer.msg('请输入5是位数的数字', {
+                layer.msg('请输入5位数的数字', {
                     time: 20000, //20s后自动关闭
                     btn: ['好的我明白了']
                 });
@@ -129,6 +129,10 @@
 
 
     };
+
+   layer.msg('${msg}',{
+       offset: 't',
+   });
 
 </script>
 

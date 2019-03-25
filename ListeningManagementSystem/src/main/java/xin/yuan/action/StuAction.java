@@ -8,6 +8,7 @@ import org.apache.struts2.ServletActionContext;
 
 import org.hibernate.Session;
 import xin.yuan.entity.Student;
+import xin.yuan.entity.Teacher;
 import xin.yuan.service.StuService;
 
 import javax.servlet.ServletContext;
@@ -171,4 +172,31 @@ public class StuAction extends ActionSupport implements ModelDriven {
         userMap.remove(ServletActionContext.getRequest().getSession().getAttribute("existUser"));
         return SUCCESS;
     }
+
+    //页面空跳转
+    public String addStudentUI(){
+
+
+        return SUCCESS;
+    }
+
+    public String addStudent(){
+        Student stu = stuService.findStudentWithOne(student);
+        if(stu==null){
+
+            stuService.addStudent(student);
+            HttpServletRequest request = ServletActionContext.getRequest();
+            request.setAttribute("msg","添加成功");
+
+
+        }else {
+            HttpServletRequest request = ServletActionContext.getRequest();
+            request.setAttribute("msg","这个账号已经存在了，请重新添加");
+        }
+        return SUCCESS;
+
+
+    }
+
+
 }

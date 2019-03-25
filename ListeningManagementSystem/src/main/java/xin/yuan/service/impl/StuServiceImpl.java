@@ -36,4 +36,15 @@ public class StuServiceImpl implements StuService {
     public void updateStudent(Student student) {
         stuDao.updateStudent(student);
     }
+
+    @Override
+    public Student findStudentWithOne(Student student) {
+
+        return stuDao.findStudentWithOne(student);
+    }
+
+    @Override
+    public void addStudent(Student student) {
+        stuDao.addStudent(student);
+    }
 }

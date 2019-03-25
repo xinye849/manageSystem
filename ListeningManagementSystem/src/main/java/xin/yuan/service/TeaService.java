@@ -20,4 +20,6 @@ public interface TeaService {
     void updateTeacher(Teacher teacher);
 
     List findAllTeacher();
+
+    String changeStatus(Teacher teacher);
 }

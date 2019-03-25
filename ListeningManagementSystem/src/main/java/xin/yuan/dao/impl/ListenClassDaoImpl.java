@@ -48,5 +48,18 @@ return null;
         return list;
     }
 
+    @Override
+    public List<ListenClass> findTeacherListensByName2(String teaName) {
+
+        List<ListenClass> list =  (List<ListenClass>)getHibernateTemplate().find("from ListenClass l where l.listenClassTeachers like ?0", "%"+teaName+"%");
+
+
+        if (list.isEmpty()){
+            return null;
+        }
+
+        return list;
+    }
+
 
 }

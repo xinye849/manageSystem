@@ -12,4 +12,6 @@ public interface ListenClassDao {
     List findTeacherListensByName(String teaName);
 
     List<ListenClass> findStudentListensByClassRoom(String classRoom);
+
+    List<ListenClass> findTeacherListensByName2(String teaName);
 }

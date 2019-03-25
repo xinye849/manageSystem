@@ -70,6 +70,7 @@
          <input type="radio" name="gender" value="女"/>女<br>
     账号：<input type="text" name="teaAccount" id="teaAccount"/> <br><h4 id="accoPrompt"></h4>
     密码：<input type="password" name="teaPassword" id="teaPassword"/><br><h4 id="pswdPrompt"></h4>
+    <input type="text" name="teaStatus" id="teaStatus" value="0" hidden/>
 
     <input type="button" id="btn" value="添加" onclick='check2()'/><input type="reset" value="重置"/>
 

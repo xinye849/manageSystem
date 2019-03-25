@@ -73,13 +73,26 @@
         <result name="success">/teaAdd.jsp</result>
     </action>
 
+    <action name="addStudentUI" class="stuAction" method="addStudentUI">
+        <result name="success">/stuAdd.jsp</result>
+    </action>
+
     <action name="addTeacher" class="teaAction" method="addTeacher">
         <result name="success" type="redirectAction">/findTeacherWithPage?num=1</result>
         <result name="error" >/teaAdd.jsp</result>
     </action>
 
+    <action name="addStudent" class="stuAction" method="addStudent">
+
+        <result name="success" >/stuAdd.jsp</result>
+    </action>
+
     <action name="delTeacherById" class="teaAction" method="delTeacherById">
         <result name="success" type="redirectAction">/findTeacherWithPage?num=1</result>
+    </action>
+
+    <action name="changeStatus" class="teaAction" method="changeStatus">
+
     </action>
 
     <action name="findMessageWithPageByTeacher" class="messageAction" method="findMessageWithPageByTeacher">
@@ -154,8 +167,8 @@
         <result name="success">/stuHomePage.jsp</result>
     </action>
 <!--帖子模块-->
-    <action name="addPostUI" class="postAction" method="addPostUI">
-        <result name="success">/addPost.jsp</result>
+    <action name="enterForumUI" class="postAction" method="enterForumUI">
+        <result name="success" type="chain">theme</result>
     </action>
     <action name="addPost" class="postAction" method="addPost">
     </action>
@@ -169,6 +182,24 @@
         <result name="success">/noticeDetail.jsp</result>
     </action>
 
+    <action name="postDetail" class="postAction" method="postDetail">
+
+    </action>
+
+    <action name="addComment" class="commentAction" method="addComment">
+
+    </action>
+
+    <action name="addCommentByPostID" class="commentAction" method="addCommentByPostID">
+
+    </action>
+
+    <action name="findPostsByCondition" class="postAction" method="findPostsByCondition">
+
+    </action>
+
+
+
 
 </package>
 
@@ -180,6 +211,12 @@
     </action>
 
     <action name="findTeacherListens" class="listenAction" method="findTeacherListensByName">
+        <result name="success" type="json">
+            <param name="root">listenList</param>
+        </result>
+    </action>
+
+    <action name="findTeacherListens2" class="listenAction" method="findTeacherListensByName2">
         <result name="success" type="json">
             <param name="root">listenList</param>
         </result>

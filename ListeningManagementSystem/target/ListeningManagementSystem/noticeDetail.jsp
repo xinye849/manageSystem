@@ -72,7 +72,7 @@
 	 <c:forEach items="${notice}" var="no">
 	 	<div class="panel panel-primary" id="div1" noticeID=${noticeID}>
 		 	<div class="panel-heading">
-		 	<div><a href='NoticesServlet' style="color:white">公告》</a></div>
+		 	<div><a href='${pageContext.request.contextPath}/noticesAll' style="color:white">公告》</a></div>
 	 			<div id="title"><b>${no.title}</b>
 				</div>
 			</div>

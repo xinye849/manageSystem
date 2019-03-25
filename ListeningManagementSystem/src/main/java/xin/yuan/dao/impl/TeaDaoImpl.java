@@ -86,4 +86,23 @@ public class TeaDaoImpl extends HibernateDaoSupport implements TeaDao {
         List list = getHibernateTemplate().find(hql);
         return list;
     }
+
+    @Override
+    public String changeStatus(Teacher teacher) {
+        Teacher tea = getHibernateTemplate().get(teacher.getClass(),teacher.getTeaId());
+        if (tea.getTeaStatus().equals("0")){
+            tea.setTeaStatus("1");
+            getHibernateTemplate().update(tea);
+        }else {
+            tea.setTeaStatus("0");
+            getHibernateTemplate().update(tea);
+
+        }
+
+        Teacher t = getHibernateTemplate().get(teacher.getClass(),tea.getTeaId());
+        return t.getTeaStatus();
+
+
+
+    }
 }

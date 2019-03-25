@@ -39,10 +39,15 @@
     <bean id="postAction" class="xin.yuan.action.PostAction">
         <property name="postService" ref="postService"></property>
         <property name="noticeService" ref="noticeService"></property>
+        <property name="commentService" ref="commentService"></property>
     </bean>
 
     <bean id="noticesAction" class="xin.yuan.action.NoticesAction">
         <property name="noticeService" ref="noticeService"></property>
+    </bean>
+
+    <bean id="commentAction" class="xin.yuan.action.CommentAction">
+        <property name="commentService" ref="commentService"></property>
     </bean>
 
 
@@ -78,6 +83,10 @@
         <property name="noticeDao" ref="noticeDao"></property>
     </bean>
 
+    <bean id="commentService" class="xin.yuan.service.impl.CommentServiceImpl">
+        <property name="commentDao" ref="commentDao"></property>
+    </bean>
+
     <!--dao依赖-->
     <bean id="stuDao" class="xin.yuan.dao.impl.StuDaoImpl">
         <property name="sessionFactory" ref="sessionFactory"></property>
@@ -106,6 +115,10 @@
     </bean>
 
     <bean id="noticeDao" class="xin.yuan.dao.impl.NoticeDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+
+    <bean id="commentDao" class="xin.yuan.dao.impl.CommentDaoImpl">
         <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
     <!--factory注入-->

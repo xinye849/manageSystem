@@ -55,7 +55,7 @@
 
         <div  class="layui-col-xs6 layui-col-sm6 layui-col-md3">
             <div class="layui-anim layui-anim-rotate">
-                <a href="${pageContext.request.contextPath}/addPostUI"><img src="images/forum.jpg" alt="课后论坛"></a>
+                <a href="${pageContext.request.contextPath}/enterForumUI"><img src="images/forum.jpg" alt="课后论坛"></a>
             </div>
          </div>
 

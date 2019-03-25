@@ -158,6 +158,7 @@
 
                 <li class="layui-nav-item"><a href="${pageContext.request.contextPath}/findTeacherWithPage?num=1">老师管理</a></li>
                 <li class="layui-nav-item"><a href="${pageContext.request.contextPath}/addTeacherUI">添加老师</a></li>
+                <li class="layui-nav-item"><a href="${pageContext.request.contextPath}/addStudentUI">添加学生</a></li>
                 <li class="layui-nav-item"><a href="${pageContext.request.contextPath}/addListenClassUI">添加听课安排</a></li>
             </ul>
         </div>

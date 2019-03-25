@@ -67,4 +67,9 @@ public class TeaServiceImpl implements TeaService {
 
         return teaDao.findAllTeacher();
     }
+
+    @Override
+    public String changeStatus(Teacher teacher) {
+        return teaDao.changeStatus(teacher);
+    }
 }

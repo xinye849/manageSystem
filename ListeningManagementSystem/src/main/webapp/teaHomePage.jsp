@@ -56,7 +56,8 @@
 
                 <li class="layui-nav-item"><a href="${pageContext.request.contextPath}/findMessageWithPageByTeacher?num=1">师生交流</a></li>
                 <li class="layui-nav-item"><a href="${pageContext.request.contextPath}/findInfoUI">修改信息</a></li>
-                <li class="layui-nav-item"><a id="tlmsg" href="#">查看我的听课信息</a></li>
+                <li class="layui-nav-item"><a id="tlmsg" href="#">我的讲课信息</a></li>
+                <li class="layui-nav-item"><a id="tlmsg2" href="#">我的听课信息</a></li>
             </ul>
         </div>
     </div>
@@ -113,23 +114,64 @@
     $(function () {
 
 
-
+/*讲课信息*/
         $('#tlmsg').click(function () {
             $('#msgdv').empty();
             $.get('${pageContext.request.contextPath}/findTeacherListens',
                 {teaName:'${existUser.teaName}'},function (data) {
 
                 $('<table id="tb" class="table table-bordered table-striped"></table>').appendTo('#msgdv');
-                $('<tr><td>课程</td><td>节数</td><td>日期</td><td>讲课老师</td><td>听课地点</td><td>听课老师</td></tr>')
+                $('<tr><td>课程</td><td>节数</td><td>日期</td><td>讲课老师</td><td>听课地点</td><td>听课老师</td><td>状态</td></tr>')
                     .appendTo('#tb');
                 $.each(eval(data),function () {
-                    $('<tr><td>'+this.listenClassCourse+'</td><td>'+this.listens+'</td><td>'+this.listenClassDate+'</td><td>'+this.listenClassLectureTeacher+'</td><td>'+this.classRoom+'</td><td>'+this.listenClassTeachers+'</td></tr>').appendTo('#tb');
+
+                    if (compareTime(this.listenClassDate)) {
+                        $('<tr><td>'+this.listenClassCourse+'</td><td>'+this.listens+'</td><td>'+this.listenClassDate+'</td><td>'+this.listenClassLectureTeacher+'</td><td>'+this.classRoom+'</td><td>'+this.listenClassTeachers+'</td><td style="color: red;">过时</td> </tr>').appendTo('#tb');
+
+                    }else {
+                        $('<tr><td>'+this.listenClassCourse+'</td><td>'+this.listens+'</td><td>'+this.listenClassDate+'</td><td>'+this.listenClassLectureTeacher+'</td><td>'+this.classRoom+'</td><td>'+this.listenClassTeachers+'</td><td style="color: green;">未开始</td> </tr>').appendTo('#tb');
+                    }
                 })
             })
+
+        });
+
+    /*听课信息*/
+        $('#tlmsg2').click(function () {
+            $('#msgdv').empty();
+            $.get('${pageContext.request.contextPath}/findTeacherListens2',
+                {teaName:'${existUser.teaName}'},function (data) {
+
+                    $('<table id="tb" class="table table-bordered table-striped"></table>').appendTo('#msgdv');
+                    $('<tr><td>课程</td><td>节数</td><td>日期</td><td>讲课老师</td><td>听课地点</td><td>听课老师</td><td>状态</td></tr>')
+                        .appendTo('#tb');
+                    $.each(eval(data),function () {
+
+                        if (compareTime(this.listenClassDate)) {
+                            $('<tr><td>'+this.listenClassCourse+'</td><td>'+this.listens+'</td><td>'+this.listenClassDate+'</td><td>'+this.listenClassLectureTeacher+'</td><td>'+this.classRoom+'</td><td>'+this.listenClassTeachers+'</td><td style="color: red;">过时</td> </tr>').appendTo('#tb');
+
+                        }else {
+                            $('<tr><td>'+this.listenClassCourse+'</td><td>'+this.listens+'</td><td>'+this.listenClassDate+'</td><td>'+this.listenClassLectureTeacher+'</td><td>'+this.classRoom+'</td><td>'+this.listenClassTeachers+'</td><td style="color: green;">未开始</td> </tr>').appendTo('#tb');
+                        }
+                    })
+                })
 
         });
 
 
     })
 </script>
+
+<script type="text/javascript">
+    function compareTime (com) {
+        var curTime = new Date();
+
+        var endTime = new Date(Date.parse(com));
+
+        return (curTime>=endTime);
+
+    }
+</script>
+
+
 </html>

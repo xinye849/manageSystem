@@ -20,37 +20,57 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
+    <link rel="stylesheet" href="js/layui/css/layui.css" media="all">
+
+    <script src="js/layui/layui.all.js"></script>
+    <script src="js/layer/layer.js"></script>
 </head>
 <body>
 
 
 
 
-<table class="table table-bordered table-hover" >
+<table class="layui-form layui-table" >
+
+ <thead>
     <tr>
-        <td>ID</td>
-        <td>姓名</td>
-        <td>账号</td>
-        <td>密码</td>
-        <td>性别</td>
-        <td>状态</td>
-        <td>操作</td>
-
+        <th>ID</th>
+        <th>姓名</th>
+        <th>账号</th>
+        <th>密码</th>
+        <th>性别</th>
+       <%-- <th>状态</th>--%>
+        <th>操作</th>
     </tr>
+    </thead>
 
-    <c:forEach var="c" items="${requestScope.pageModel.list}">
+
+        <tbody>
+        <c:forEach var="c" items="${requestScope.pageModel.list}">
         <tr>
             <td><c:out value="${c.teaId}"/></td>
             <td><c:out value="${c.teaName}"/></td>
             <td><c:out value="${c.teaAccount}"/></td>
             <td><c:out value="${c.teaPassword}"/></td>
             <td><c:out value="${c.gender}"/></td>
-            <td><c:out value="${c.teaStatus}"/></td>
-            <td><a href="#" onclick="delTea(${c.teaId})">删除</a> </td>
+
+            <%-- <td id="st"><c:out value="${c.teaStatus}"/></td>--%>
+
+
+
+            <td colspan="2"><a href="#" onclick="delTea(${c.teaId})">删除</a>
+
+                    <div class="layui-input-block"   onclick="switchstatus(${c.teaId})">
+                        <input type="checkbox" name="close" checked lay-skin="switch"  lay-text="ON|OFF" >
+                    </div>
+
+            </td>
+
         </tr>
+        </c:forEach>
+        </tbody>
 
 
-    </c:forEach>
 </table>
 
 
@@ -105,5 +125,65 @@
     }
 
 
+
+
+</script>
+
+
+
+
+<script>
+    layui.use('form', function(){
+        var form = layui.form;
+        form.render();
+
+
+
+
+
+    });
+
+
+</script>
+
+<script type="text/javascript">
+  /*  $(function () {
+
+        $("div[name='open']").click(function () {
+            console.log($(this).children('input').val());
+
+
+        })
+    })*/
+
+    function switchstatus(id) {
+
+
+            $.post('${pageContext.request.contextPath}/changeStatus',{teaId:id},function (data) {
+
+               js = $.parseJSON(data);
+
+
+                if (js.status==='0'){
+                    layer.msg('启用成功');
+
+                }else if(js.status==='1'){
+                    layer.msg('禁用成功')
+                }
+                else {
+                    layer.msg('操作失败')
+                }
+
+
+
+
+
+
+            })
+
+
+
+
+    }
 </script>
 </html>

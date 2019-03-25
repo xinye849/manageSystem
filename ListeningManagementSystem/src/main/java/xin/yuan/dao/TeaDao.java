@@ -1,6 +1,5 @@
 package xin.yuan.dao;
 
-import xin.yuan.entity.Student;
 import xin.yuan.entity.Teacher;
 
 import java.util.List;
@@ -21,4 +20,6 @@ public interface TeaDao {
     void updateTeacher(Teacher teacher);
 
     List findAllTeacher();
+
+    String changeStatus(Teacher teacher);
 }
