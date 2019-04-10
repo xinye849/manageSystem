@@ -50,6 +50,13 @@
         <property name="commentService" ref="commentService"></property>
     </bean>
 
+    <bean id="feedBackAction" class="xin.yuan.action.FeedBackAction">
+        <property name="feedBackService" ref="feedBackService"></property>
+       <!-- <property name="feedBack" ref="feedBack"></property>-->
+    </bean>
+
+
+
 
 
     <!--service依赖-->
@@ -87,6 +94,11 @@
         <property name="commentDao" ref="commentDao"></property>
     </bean>
 
+
+      <bean id="feedBackService" class="xin.yuan.service.impl.FeedBackServiceImpl">
+            <property name="feedBackDao" ref="feedBackDao"></property>
+          <property name="listenClassDao" ref="listenClassDao"></property>
+        </bean>
     <!--dao依赖-->
     <bean id="stuDao" class="xin.yuan.dao.impl.StuDaoImpl">
         <property name="sessionFactory" ref="sessionFactory"></property>
@@ -119,6 +131,10 @@
     </bean>
 
     <bean id="commentDao" class="xin.yuan.dao.impl.CommentDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+
+    <bean id="feedBackDao" class="xin.yuan.dao.impl.FeedBackDaoImpl">
         <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
     <!--factory注入-->
@@ -178,5 +194,7 @@
 
 
 
+<!--entity注入-->
+ <!--<bean id="feedBack" class="xin.yuan.entity.feedBack"></bean>-->
 
 </beans>

@@ -14,7 +14,10 @@
 <html>
 <head>
     <title>添加学生</title>
-
+    <link rel="stylesheet" href="js/layui/css/layui.css" media="all">
+    <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+    <script src="js/layui/layui.all.js"></script>
+    <script src="js/layer/layer.js"></script>
     <script type="text/javascript">
         window.onload = function () {
             document.getElementById("stuName").onblur=function () {
@@ -64,41 +67,82 @@
 
 </head>
 <body>
-<form action="${pageContext.request.contextPath}/addStudent" method="post" id="fm">
-    姓名：<input type="text" name="stuName" id="stuName"/><br><h4 id="namePrompt"></h4>
-    性别：<input type="radio" name="gender" value="男" checked/>男
-    <input type="radio" name="gender" value="女"/>女<br>
-    账号：<input type="text" name="stuAccount" id="stuAccount"/> <br><h4 id="accoPrompt"></h4>
-    密码：<input type="password" name="stuPassword" id="stuPassword"/><br><h4 id="pswdPrompt"></h4>
+<form class="layui-form" action="${pageContext.request.contextPath}/addStudent" method="post" id="fm">
+    <table class="layui-table" lay-size="lg" style="margin-bottom: 70px;text-align: center;">
+        <tr>
+            <td>姓名：</td>
+            <td><input class="layui-input" type="text" name="stuName" id="stuName"/></td>
+            <td><h4 id="namePrompt"></h4></td>
+        </tr>
+        <tr>
+            <td>性别：</td>
+            <td><input class="layui-input" type="radio" name="gender" value="男" checked/>男</td>
+            <td><input class="layui-input" type="radio" name="gender" value="女"/>女</td>
+        </tr>
+        <tr>
+            <td>账号：</td>
+            <td><input class="layui-input" type="text" name="stuAccount" id="stuAccount"/></td>
+            <td><h4 id="accoPrompt"></h4></td>
+        </tr>
+        <tr>
+            <td>密码：</td>
+            <td><input class="layui-input" type="password" name="stuPassword" id="stuPassword"/></td>
+            <td><h4 id="pswdPrompt"></h4></td>
+        </tr>
+        <tr>
+            <td>班级：</td>
+            <td><select name="classRoom">
+                <option value="#">请选择</option>
+                <option value="a01">a01</option>
+                <option value="a02">a02</option>
+                <option value="a03">a03</option>
+                <option value="b01">b01</option>
+                <option value="b02">b02</option>
+                <option value="b03">b03</option>
+                <option value="c01">c01</option>
+                <option value="c02">c02</option>
+                <option value="c03">c03</option>
+                <option value="c04">c04</option>
+                <option value="e01">e01</option>
+                <option value="e02">e02</option>
+                <option value="e03">e03</option>
+                <option value="f01">f01</option>
+                <option value="f02">f02</option>
+                <option value="f03">f03</option>
+            </select></td>
+        </tr>
     <input type="text" name="stuStatus" id="stuStatus" value="0" hidden/>
     <input type="text" name="type" id="type" value="student" hidden/>
-    班级：<select name="classRoom">
-        <option value="a01">a01</option>
-        <option value="a02">a02</option>
-        <option value="a03">a03</option>
-        <option value="b01">b01</option>
-        <option value="b02">b02</option>
-        <option value="b03">b03</option>
-        <option value="c01">c01</option>
-        <option value="c02">c02</option>
-        <option value="c03">c03</option>
-        <option value="c04">c04</option>
-        <option value="e01">e01</option>
-        <option value="e02">e02</option>
-        <option value="e03">e03</option>
-        <option value="f01">f01</option>
-        <option value="f02">f02</option>
-        <option value="f03">f03</option>
-    </select>
+        <tr>
+            <td colspan="2"><input class="layui-btn layui-btn-normal" type="button" id="btn" value="添加" onclick='check2()'/>
+                <input class="layui-btn layui-btn-warm" type="reset" value="重置"/></td>
+
+            <td> <h3>${msg}</h3></td>
+        </tr>
+    </table>
 
 
-    <input type="button" id="btn" value="添加" onclick='check2()'/><input type="reset" value="重置"/>
 
-    <h3>${msg}</h3>
+
 
 
 </form>
 </body>
+
+
+<script>
+    layui.use('form', function(){
+        var form = layui.form;
+
+        form.render();
+
+        //各种基于事件的操作，下面会有进一步介绍
+    });
+</script>
+
+
+
+
 <script type="text/javascript">
 
     function check2() {

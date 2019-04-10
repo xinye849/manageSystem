@@ -14,24 +14,25 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta content="width=device-width,initial-scale=1" name="viewport">
-    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="js/layui/css/layui.css" media="all">
     <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
-
+    <script src="js/layui/layui.all.js"></script>
+    <script src="js/layer/layer.js"></script>
     <title>添加课程安排</title>
 </head>
 <body>
 
 
-<form action="${pageContext.request.contextPath}/addListenClass" method="post">
+<form  class="layui-form" action="${pageContext.request.contextPath}/addListenClass" method="post">
 
-    <table>
+    <table class="layui-table" lay-size="lg" style="margin-bottom: 70px;text-align: center;">
 
 
         <tr>
             <td>听课名称:</td>
             <td>
                 <select name="listenClassCourse">
+                    <option value="#">请选择</option>
                     <option value="语文">语文</option>
                     <option value="高数">高数</option>
                     <option value="英语">英语</option>
@@ -53,12 +54,13 @@
         </tr>
         <tr>
             <td>听课日期:</td>
-            <td><input type="date" name="listenClassDate" /></td>
+            <td><input type="text" name="listenClassDate" class="layui-input" id="listenTime" placeholder="请选择授课时间"/></td>
         </tr>
         <tr>
         <td>节数:</td>
             <td>
         <select name="listens">
+        <option value="#">请选择</option>
         <option value="第一节">第一节</option>
         <option value="第二节">第二节</option>
         <option value="第三节">第三节</option>
@@ -75,6 +77,7 @@
             <td>听课地点:</td>
             <td>
                 <select name="classRoom">
+                    <option value="#">请选择</option>
                     <option value="a01">a01</option>
                     <option value="a02">a02</option>
                     <option value="a03">a03</option>
@@ -105,25 +108,27 @@
 
 </div>
             </td>
-            <td><textarea id="teaArea" name="listenClassTeachers" class="form-control" rows="3" cols="5" style="resize:none"></textarea></td>
+            <td><textarea id="teaArea" name="listenClassTeachers"  cols="150" rows="7" style="resize:none"></textarea></td>
 
         </tr>
 
         <tr>
             <td>讲课老师:</td>
             <td>
-                <select name="listenClassLectureTeacher" id="listenClassLectureTeacher" style="width: 100px">
+                <select name="listenClassLectureTeacher" id="listenClassLectureTeacher" >
 
 
 
                 </select>
             </td>
+
         </tr>
         <tr>
             <td align="center" colspan="2">
-        <input type="submit" />
+        <input type="submit" class="layui-btn layui-btn-normal" />
             </td>
         </tr>
+  <input type="text" name="status" hidden value="0">
 
 
 
@@ -150,6 +155,9 @@
 </script>
 </body>
 <script type="text/javascript">
+layui.use('form',function () {
+    var form = layui.form;
+
 
 
 
@@ -203,13 +211,9 @@ if ( $('#teaArea').val()==''||$('#teaArea').val()==null){ $('#teaArea').val($(th
 
 
 //二次利用把老师信息添加到option中
+   $('<option>' + this.teaName + '</option>').val(this.teaName).appendTo('#listenClassLectureTeacher');
+                   form.render();
 
-
-
-                    if (sum == 1) {
-                        $('<option>' + this.teaName + '</option>').val(this.teaName).appendTo('#listenClassLectureTeacher');
-
-                    }
 
 
 
@@ -226,5 +230,19 @@ if ( $('#teaArea').val()==''||$('#teaArea').val()==null){ $('#teaArea').val($(th
        })
 
    })
+})
+</script>
+
+<script>
+    layui.use(['form','laydate'], function(){
+        var form = layui.form;
+        var laydate = layui.laydate;
+        form.render();
+
+        laydate.render({
+            elem: '#listenTime'
+        });
+        //各种基于事件的操作，下面会有进一步介绍
+    });
 </script>
 </html>

@@ -99,6 +99,10 @@
         <result name="success" >/messageManage.jsp</result>
     </action>
 
+    <action name="teacherResponseById" class="messageAction" method="teacherResponseById">
+        <result name="success">/teacherResponse.jsp</result>
+    </action>
+
     <action name="replayUI" class="messageAction" method="replayUI">
         <result name="success">/messageReplay.jsp</result>
     </action>
@@ -195,6 +199,34 @@
     </action>
 
     <action name="findPostsByCondition" class="postAction" method="findPostsByCondition">
+
+    </action>
+
+    <action name="findFeedBackUI" class="feedBackAction" method="findFeedBackUI">
+        <result name="success">/feedBack.jsp</result>
+    </action>
+
+    <action name="saveFeedBackById" class="feedBackAction" method="saveFeedBackById">
+        <result name="success">/teaHomePage.jsp</result>
+    </action>
+
+    <action name="fingAllListens" class="listenAction" method="fingAllListens">
+        <result name="success">/allTeacherListen.jsp</result>
+    </action>
+
+    <action name="findFeedBackById" class="feedBackAction" method="findFeedBackById">
+        <result name="success">/myFeedBack.jsp</result>
+    </action>
+
+    <action name="findFeedBackByOne" class="feedBackAction" method="findFeedBackByOne">
+        <result name="success">/feedBackInf.jsp</result>
+    </action>
+
+    <action name="findGradeByListenId" class="feedBackAction" method="findGradeByListenId">
+        <result name="success">/chart.jsp</result>
+    </action>
+
+    <action name="findFeedBackByTea" class="feedBackAction" method="findFeedBackByTea">
 
     </action>
 

@@ -2,6 +2,7 @@ package xin.yuan.action;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import net.sf.json.JSONObject;
 import org.apache.struts2.ServletActionContext;
 import xin.yuan.entity.Message;
 import xin.yuan.entity.Student;
@@ -108,6 +109,14 @@ public class MessageAction extends ActionSupport implements ModelDriven {
 
 
 
+
+        return SUCCESS;
+    }
+
+    public String teacherResponseById(){
+        Message m =messageService.teacherResponseById(message);
+
+        ServletActionContext.getRequest().setAttribute("message",m);
 
         return SUCCESS;
     }

@@ -70,4 +70,10 @@ public class MessageServiceImpl implements MessageService {
         pm.setUrl("findAllMessages");
         return pm;
     }
+
+    @Override
+    public Message teacherResponseById(Message message) {
+
+        return messageDao.teacherResponseById(message);
+    }
 }

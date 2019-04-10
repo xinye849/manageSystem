@@ -21,7 +21,7 @@ public class ListenClassDaoImpl extends HibernateDaoSupport implements ListenCla
 
     @Override
     public List fingAllListens() {
-        String hql = "from ListenClass";
+        String hql = "from ListenClass order by listenClassDate desc";
       return   getHibernateTemplate().find(hql);
     }
 
@@ -59,6 +59,18 @@ return null;
         }
 
         return list;
+    }
+
+    @Override
+    public void updateListenById(int id) {
+        ListenClass lc = getHibernateTemplate().get(ListenClass.class,id);
+        if (lc.getStatus()==1){
+            lc.setStatus(1);
+        }else {
+            lc.setStatus(lc.getStatus()+1);
+            getHibernateTemplate().update(lc);
+        }
+
     }
 
 

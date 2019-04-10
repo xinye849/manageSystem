@@ -14,6 +14,11 @@
 <html>
 <head>
     <title>添加老师</title>
+    <link rel="stylesheet" href="js/layui/css/layui.css" media="all">
+    <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+    <script src="js/layui/layui.all.js"></script>
+    <script src="js/layer/layer.js"></script>
+
 
     <script type="text/javascript">
         window.onload = function () {
@@ -64,21 +69,54 @@
 
 </head>
 <body>
-<form action="${pageContext.request.contextPath}/addTeacher" method="post" id="fm">
-    姓名：<input type="text" name="teaName" id="teaName"/><br><h4 id="namePrompt"></h4>
-    性别：<input type="radio" name="gender" value="男" checked/>男
-         <input type="radio" name="gender" value="女"/>女<br>
-    账号：<input type="text" name="teaAccount" id="teaAccount"/> <br><h4 id="accoPrompt"></h4>
-    密码：<input type="password" name="teaPassword" id="teaPassword"/><br><h4 id="pswdPrompt"></h4>
-    <input type="text" name="teaStatus" id="teaStatus" value="0" hidden/>
+<form class="layui-form" action="${pageContext.request.contextPath}/addTeacher" method="post" id="fm">
+    <table class="layui-table" lay-size="lg" style="margin-bottom: 70px;text-align: center;">
+        <tr>
+            <td>姓名：</td>
+            <td><input class="layui-input" type="text" name="teaName" id="teaName"/></td>
+            <td><h4 id="namePrompt"></h4></td>
+        </tr>
+        <tr>
+            <td>性别：</td>
+            <td><input class="layui-input" type="radio" name="gender" value="男" checked/>男</td>
+            <td><input class="layui-input" type="radio" name="gender" value="女"/>女<br></td>
+        </tr>
+        <tr>
+            <td>账号：</td>
+            <td><input class="layui-input" type="text" name="teaAccount" id="teaAccount"/></td>
+            <td><h4 id="accoPrompt"></h4></td>
+        </tr>
+        <tr>
+            <td>密码：</td>
+            <td><input class="layui-input" type="password" name="teaPassword" id="teaPassword"/></td>
+            <td><h4 id="pswdPrompt"></h4></td>
+        </tr>
+        <input  type="text" name="teaStatus" hidden id="teaStatus" value="0" />
+        <tr>
+            <td><input class="layui-btn layui-btn-normal" type="button" id="btn" value="添加" onclick='check2()'/></td>
+            <td><input class="layui-btn layui-btn-warm" type="reset" value="重置"/></td>
+            <td><h3>${msg}</h3></td>
+        </tr>
 
-    <input type="button" id="btn" value="添加" onclick='check2()'/><input type="reset" value="重置"/>
-
-<h3>${msg}</h3>
+    </table>
 
 
 </form>
 </body>
+
+
+<script>
+    layui.use('form', function(){
+        var form = layui.form;
+
+        form.render();
+
+        //各种基于事件的操作，下面会有进一步介绍
+    });
+</script>
+
+
+
 <script type="text/javascript">
 
     function check2() {

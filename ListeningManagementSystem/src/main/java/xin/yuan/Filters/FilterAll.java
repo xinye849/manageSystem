@@ -25,7 +25,7 @@ public class FilterAll implements Filter{
         HttpServletResponse response = (HttpServletResponse)servletResponse;
         HttpSession session = request.getSession();
         String path = request.getRequestURI();
-        String[] urls = {"Login","index",".css",".ico",".jpg",".png","jpeg","ttf","layui","jquery"};
+        String[] urls = {"Login","index",".css",".ico",".jpg",".png","jpeg","ttf","layui","jquery","echarts","/js/"};
         for (String url :urls){
             if (path.indexOf(url)!=-1){
                 filterChain.doFilter(servletRequest,servletResponse);

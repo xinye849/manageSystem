@@ -4,6 +4,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import net.sf.json.JSONArray;
 import org.apache.struts2.ServletActionContext;
+import xin.yuan.dao.ListenClassDao;
 import xin.yuan.entity.ListenClass;
 import xin.yuan.service.ListenClassService;
 
@@ -55,6 +56,7 @@ public class ListenAction extends ActionSupport implements ModelDriven {
     //查看所有听课信息
     public String fingAllListens(){
         List<ListenClass> listenList = listenClassService.fingAllListens();
+        ServletActionContext.getRequest().setAttribute("listenList",listenList);
 
         return SUCCESS;
     }
@@ -83,6 +85,12 @@ public class ListenAction extends ActionSupport implements ModelDriven {
         String classRoom = request.getParameter("classRoom");
         JSONArray jsonArray = JSONArray.fromObject((List<ListenClass>)listenClassService.findStudentListensByClassRoom(classRoom));
         listenList = jsonArray.toString();
+        return SUCCESS;
+    }
+
+    //通过id更新听课状态
+    public String updateListenById(){
+
         return SUCCESS;
     }
 

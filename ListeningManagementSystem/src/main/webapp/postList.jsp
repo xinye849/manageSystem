@@ -81,7 +81,7 @@ body {
 <body>
 	<div id="div1">
 		<div id="div2">
-			<form role="form" action="PostList" method="post">
+			<form role="form" action="${pageContext.request.contextPath}/findPostsByCondition" method="post">
 				<div class="form-group">
 					<input style="width: 200px;float: left; height: 30px" type="text"
 						class="form-control" name="querytitle" placeholder="输入关键字">

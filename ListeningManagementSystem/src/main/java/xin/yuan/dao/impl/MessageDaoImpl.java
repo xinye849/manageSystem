@@ -131,5 +131,11 @@ public class MessageDaoImpl extends HibernateDaoSupport implements MessageDao {
         });
     }
 
+    @Override
+    public Message teacherResponseById(Message message) {
+
+        return getHibernateTemplate().get(message.getClass(),message.getMessageId());
+    }
+
 
 }

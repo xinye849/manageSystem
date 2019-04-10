@@ -20,4 +20,6 @@ public interface MessageDao {
     void replayMessage(Message message);
 
     List<Message> findAllMessages(int startIndex, int pageSize);
+
+    Message teacherResponseById(Message message);
 }

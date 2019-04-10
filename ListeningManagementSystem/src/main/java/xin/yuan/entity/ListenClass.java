@@ -1,5 +1,8 @@
 package xin.yuan.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
@@ -13,6 +16,9 @@ import java.io.Serializable;
 @Entity
 @Table(name = "L_listenClass")
 @DynamicUpdate(true)
+@Setter
+@Getter
+@ToString
 public class ListenClass implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,77 +37,9 @@ public class ListenClass implements Serializable {
     private String listenClassLectureTeacher;//讲课老师
     @Column(name = "classRoom")
     private String classRoom;//听课地点
-
-
-    public Integer getListenClassId() {
-        return listenClassId;
-    }
-
-    public void setListenClassId(Integer listenClassId) {
-        this.listenClassId = listenClassId;
-    }
+    @Column(name = "status")
+    private int status;
 
 
 
-    public String getListenClassDate() {
-        return listenClassDate;
-    }
-
-    public void setListenClassDate(String listenClassDate) {
-        this.listenClassDate = listenClassDate;
-    }
-
-    public String getListens() {
-        return listens;
-    }
-
-    public void setListens(String listens) {
-        this.listens = listens;
-    }
-
-    public String getListenClassCourse() {
-        return listenClassCourse;
-    }
-
-    public void setListenClassCourse(String listenClassCourse) {
-        this.listenClassCourse = listenClassCourse;
-    }
-
-    public String getListenClassTeachers() {
-        return listenClassTeachers;
-    }
-
-    public void setListenClassTeachers(String listenClassTeachers) {
-        this.listenClassTeachers = listenClassTeachers;
-    }
-
-    public String getListenClassLectureTeacher() {
-        return listenClassLectureTeacher;
-    }
-
-    public void setListenClassLectureTeacher(String listenClassLectureTeacher) {
-        this.listenClassLectureTeacher = listenClassLectureTeacher;
-    }
-
-    public String getClassRoom() {
-        return classRoom;
-    }
-
-    public void setClassRoom(String classRoom) {
-        this.classRoom = classRoom;
-    }
-
-    @Override
-    public String toString() {
-        return "ListenClass{" +
-                "listenClassId=" + listenClassId +
-
-                ", listenClassDate='" + listenClassDate + '\'' +
-                ", listens='" + listens + '\'' +
-                ", listenClassCourse='" + listenClassCourse + '\'' +
-                ", listenClassTeachers='" + listenClassTeachers + '\'' +
-                ", listenClassLectureTeacher='" + listenClassLectureTeacher + '\'' +
-                ", classRoom='" + classRoom + '\'' +
-                '}';
-    }
 }

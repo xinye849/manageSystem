@@ -14,39 +14,67 @@
 <html>
 <head>
     <title>教师信息</title>
-    <!--支持移动设备优先-->
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="js/layui/css/layui.css" media="all">
     <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
-    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script src="js/layui/layui.all.js"></script>
+    <script src="js/layer/layer.js"></script>
 </head>
 <body>
-<form action="${pageContext.request.contextPath}/updateTeacher" method="post" id="fm">
+<form class="layui-form" action="${pageContext.request.contextPath}/updateTeacher" method="post" id="fm">
 
-    <label for="teaName" class="col-md-1 control-label">姓名:</label><input type="text" name="teaName" value="${existUser.teaName}" id="teaName"/><br>
-    <label for="teaAccount" class="col-md-1 control-label">编号:</label><input type="text" name="teaAccount" value="${existUser.teaAccount}" id="teaAccount" readonly/><br>
-    <label for="teaPassword" class="col-md-1 control-label">新密码:</label><input type="password" name="teaPassword" value="${existUser.teaPassword}" id="teaPassword"/><br>
-    <label class="col-md-1 control-label">性别:</label><c:if test="${existUser.gender=='男'}">
-    <input type="radio" name="gender" value="男" checked/>男
-    <input type="radio" name="gender" value="女"/>女<br>
-        </c:if>
+    <table class="layui-table" lay-size="lg" style="margin-bottom: 70px;text-align: center;">
+        <tr>
+            <td>姓名：</td>
+            <td><input class="layui-input" type="text" name="teaName" value="${existUser.teaName}" id="teaName"/></td>
 
-    <c:if test="${existUser.gender=='女'}">
-        <input type="radio" name="gender" value="男"/>男
-        <input type="radio" name="gender" value="女" checked/>女<br>
-    </c:if>
-    <c:if test="${existUser.gender==null||existUser.gender==''}">
-        <input type="radio" name="gender" value="男"/>男
-        <input type="radio" name="gender" value="女" />女<br>
-    </c:if>
-<input type="hidden" name="teaId" value="${existUser.teaId}"/><br>
-    <input class="btn btn-default" type="submit" value="修改"/>&nbsp<input class="btn btn-default" type="reset" value="重置"/><br>
+        </tr>
+
+
+        <tr>
+            <td>编号:</td>
+            <td><input class="layui-input" type="text" name="teaAccount" value="${existUser.teaAccount}" id="teaAccount" readonly/></td>
+        </tr>
+
+        <tr>
+            <td>新密码:</td>
+            <td><input class="layui-input" type="password" name="teaPassword" value="${existUser.teaPassword}" id="teaPassword"/></td>
+
+        </tr>
+
+        <tr>
+            <td>性别:</td>
+            <td><c:if test="${existUser.gender=='男'}">
+                <input class="layui-input" type="radio" name="gender" value="男" checked/>男
+                <input class="layui-input" type="radio" name="gender" value="女"/>女<br>
+            </c:if>
+
+                <c:if test="${existUser.gender=='女'}">
+                    <input class="layui-input" type="radio" name="gender" value="男"/>男
+                    <input class="layui-input" type="radio" name="gender" value="女" checked/>女<br>
+                </c:if>
+                <c:if test="${existUser.gender==null||existUser.gender==''}">
+                    <input class="layui-input" type="radio" name="gender" value="男"/>男
+                    <input class="layui-input" type="radio" name="gender" value="女" />女<br>
+                </c:if>
+            </td>
+
+        </tr>
+        <input type="hidden" name="teaId" value="${existUser.teaId}"/><br>
+
+
+        <tr>
+            <td><input class="layui-btn layui-btn-normal" type="submit" id="btn" value="修改" /></td>
+            <td><input class="layui-btn layui-btn-warm" type="reset" value="重置"/></td>
+
+        </tr>
+
+
 
 <div >
     <h2 id="msgh2">${msg}</h2>
 </div>
 
-
+    </table>
 </form>
 </body>
 <script type="text/javascript">
@@ -64,5 +92,15 @@
         },1000);
 
     })
+</script>
+
+<script>
+    layui.use('form', function(){
+        var form = layui.form;
+
+        form.render();
+
+        //各种基于事件的操作，下面会有进一步介绍
+    });
 </script>
 </html>

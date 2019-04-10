@@ -10,11 +10,14 @@ import org.hibernate.Session;
 import xin.yuan.entity.Student;
 import xin.yuan.entity.Teacher;
 import xin.yuan.service.StuService;
+import xin.yuan.utils.Md5Encode;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
@@ -49,7 +52,10 @@ public class StuAction extends ActionSupport implements ModelDriven {
     }
 
 
-    public String stuLogin(){
+    public String stuLogin() throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        //进行md5加密
+        String md5Psw = Md5Encode.encodeByMd5(student.getStuPassword());
+        student.setStuPassword(md5Psw);
 
         Student stu = stuService.stuLogin(student);
 
@@ -97,7 +103,12 @@ public class StuAction extends ActionSupport implements ModelDriven {
         return SUCCESS;
     }
 
-    public String updateStudent(){
+    public String updateStudent() throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        //进行md5加密
+        String md5Psw = Md5Encode.encodeByMd5(student.getStuPassword());
+        student.setStuPassword(md5Psw);
+
+
         stuService.updateStudent(student);
         ServletActionContext.getRequest().setAttribute("msg","修改成功");
         return SUCCESS;
@@ -180,7 +191,10 @@ public class StuAction extends ActionSupport implements ModelDriven {
         return SUCCESS;
     }
 
-    public String addStudent(){
+    public String addStudent() throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        //进行md5加密
+        String md5Psw = Md5Encode.encodeByMd5(student.getStuPassword());
+        student.setStuPassword(md5Psw);
         Student stu = stuService.findStudentWithOne(student);
         if(stu==null){
 

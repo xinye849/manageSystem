@@ -117,7 +117,7 @@
                 </dl>
             </li>
             <li class="layui-nav-item">
-                <a href="">查看日志<span class="layui-badge">9</span></a>
+                <a href="">公告管理</a>
             </li>
             <li class="layui-nav-item">
                 <a href="javascript:;">其它系统</a>
@@ -160,6 +160,7 @@
                 <li class="layui-nav-item"><a href="${pageContext.request.contextPath}/addTeacherUI">添加老师</a></li>
                 <li class="layui-nav-item"><a href="${pageContext.request.contextPath}/addStudentUI">添加学生</a></li>
                 <li class="layui-nav-item"><a href="${pageContext.request.contextPath}/addListenClassUI">添加听课安排</a></li>
+                <li class="layui-nav-item"><a href="${pageContext.request.contextPath}/fingAllListens">听课记录管理</a></li>
             </ul>
         </div>
     </div>

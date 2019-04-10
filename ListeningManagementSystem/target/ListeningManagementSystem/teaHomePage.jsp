@@ -17,10 +17,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta content="width=device-width,initial-scale=1" name="viewport">
     <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/layui.css">
+    <link rel="stylesheet" href="js/layui/css/layui.css" media="all">
     <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+    <script src="js/layui/layui.all.js"></script>
+    <script src="js/layer/layer.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
-    <script type="text/javascript" src="js/layui.js"></script>
+
 
 
 </head>
@@ -58,6 +60,7 @@
                 <li class="layui-nav-item"><a href="${pageContext.request.contextPath}/findInfoUI">修改信息</a></li>
                 <li class="layui-nav-item"><a id="tlmsg" href="#">我的讲课信息</a></li>
                 <li class="layui-nav-item"><a id="tlmsg2" href="#">我的听课信息</a></li>
+                <li class="layui-nav-item"><a id="tlmsg3" href="#">历史反馈记录</a></li>
             </ul>
         </div>
     </div>
@@ -67,7 +70,7 @@
         <div id="msgdv"></div>
     </div>
 
-    <div class="layui-footer">
+    <div  class="layui-footer">
         <!-- 底部固定区域 -->
         © xin.yuan 2018--2019
     </div>
@@ -143,21 +146,63 @@
                 {teaName:'${existUser.teaName}'},function (data) {
 
                     $('<table id="tb" class="table table-bordered table-striped"></table>').appendTo('#msgdv');
-                    $('<tr><td>课程</td><td>节数</td><td>日期</td><td>讲课老师</td><td>听课地点</td><td>听课老师</td><td>状态</td></tr>')
+                    $('<tr><td>课程</td><td>节数</td><td>日期</td><td>讲课老师</td><td>听课地点</td><td>听课老师</td><td>操作</td><td>状态</td></tr>')
                         .appendTo('#tb');
                     $.each(eval(data),function () {
 
-                        if (compareTime(this.listenClassDate)) {
-                            $('<tr><td>'+this.listenClassCourse+'</td><td>'+this.listens+'</td><td>'+this.listenClassDate+'</td><td>'+this.listenClassLectureTeacher+'</td><td>'+this.classRoom+'</td><td>'+this.listenClassTeachers+'</td><td style="color: red;">过时</td> </tr>').appendTo('#tb');
 
+                        if (compareTime(this.listenClassDate)) {
+                            //本来想用来做屏蔽，但是status字段没考虑完全，所以此功能先不用
+                           /* if(this.status!=1){
+                            $('<tr><td>'+this.listenClassCourse+'</td><td>'+this.listens+'</td><td>'+this.listenClassDate+'</td><td>'+this.listenClassLectureTeacher+'</td><td>'+this.classRoom+'</td><td>'+this.listenClassTeachers+'</td><td><a style="pointer-events: none" href="${pageContext.request.contextPath}/findFeedBackUI?listenClassId='+this.listenClassId+'">听课反馈</a></td> <td style="color: red;">过时</td> </tr>').appendTo('#tb');
+                            }else {
+                                $('<tr><td>'+this.listenClassCourse+'</td><td>'+this.listens+'</td><td>'+this.listenClassDate+'</td><td>'+this.listenClassLectureTeacher+'</td><td>'+this.classRoom+'</td><td>'+this.listenClassTeachers+'</td><td><a  href="${pageContext.request.contextPath}/findFeedBackUI?listenClassId='+this.listenClassId+'">听课反馈</a></td> <td style="color: red;">过时</td> </tr>').appendTo('#tb');
+                            }*/
+                            $('<tr><td>'+this.listenClassCourse+'</td><td>'+this.listens+'</td><td>'+this.listenClassDate+'</td><td>'+this.listenClassLectureTeacher+'</td><td>'+this.classRoom+'</td><td>'+this.listenClassTeachers+'</td><td><a  href="${pageContext.request.contextPath}/findFeedBackUI?listenClassId='+this.listenClassId+'">听课反馈</a></td> <td style="color: red;">过时</td> </tr>').appendTo('#tb');
                         }else {
-                            $('<tr><td>'+this.listenClassCourse+'</td><td>'+this.listens+'</td><td>'+this.listenClassDate+'</td><td>'+this.listenClassLectureTeacher+'</td><td>'+this.classRoom+'</td><td>'+this.listenClassTeachers+'</td><td style="color: green;">未开始</td> </tr>').appendTo('#tb');
+                            /*if (this.status!=1){
+                                $('<tr><td>'+this.listenClassCourse+'</td><td>'+this.listens+'</td><td>'+this.listenClassDate+'</td><td>'+this.listenClassLectureTeacher+'</td><td>'+this.classRoom+'</td><td>'+this.listenClassTeachers+'</td><td><a style="pointer-events: none"  href="${pageContext.request.contextPath}/findFeedBackUI?listenClassId='+this.listenClassId+'">听课反馈</a></td><td style="color: green;">未开始</td> </tr>').appendTo('#tb');
+                            }else {
+                                $('<tr><td>'+this.listenClassCourse+'</td><td>'+this.listens+'</td><td>'+this.listenClassDate+'</td><td>'+this.listenClassLectureTeacher+'</td><td>'+this.classRoom+'</td><td>'+this.listenClassTeachers+'</td><td><a href="${pageContext.request.contextPath}/findFeedBackUI?listenClassId='+this.listenClassId+'">听课反馈</a></td><td style="color: green;">未开始</td> </tr>').appendTo('#tb');
+                            }*/
+                            $('<tr><td>'+this.listenClassCourse+'</td><td>'+this.listens+'</td><td>'+this.listenClassDate+'</td><td>'+this.listenClassLectureTeacher+'</td><td>'+this.classRoom+'</td><td>'+this.listenClassTeachers+'</td><td><a href="${pageContext.request.contextPath}/findFeedBackUI?listenClassId='+this.listenClassId+'">听课反馈</a></td><td style="color: green;">未开始</td> </tr>').appendTo('#tb');
+
                         }
+
+                       /* if(this.status!=0){
+
+                            $('a').each(function () {
+                              $(this).attr("disabled",true).removeAttr("href").removeAttr("onclick");//只能反馈一次，禁止再次触发点击事件
+                            })
+                        }*/
+
+
+
                     })
                 })
 
         });
 
+
+
+
+        /*历史反馈记录*/
+        $('#tlmsg3').click(function () {
+            $('#msgdv').empty();
+            $.get('${pageContext.request.contextPath}/findFeedBackByTea',{listenClassTeachers:'${existUser.teaName}'},function (data) {
+
+                $('<table id="tb" class="table table-bordered table-striped"></table>').appendTo('#msgdv');
+                $('<tr><td>讲课老师</td><td>反馈时间</td><td>操作</td></tr>')
+                    .appendTo('#tb');
+                $.each($.parseJSON(data),function () {
+                    $('<tr><td>'+this.listenClassLectureTeacher+'</td><td>'+this.listenClassDate+'</td><td><a href="${pageContext.request.contextPath}/findFeedBackByOne?id='+this.id+'">查看</a> </td></tr>').appendTo('#tb');
+
+                })
+
+
+            })
+
+        })
 
     })
 </script>
@@ -172,6 +217,14 @@
 
     }
 </script>
+
+<script>
+    layer.msg('${msg}',{
+        offset: 't',
+    });
+</script>
+
+
 
 
 </html>

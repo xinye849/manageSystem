@@ -96,7 +96,7 @@
 
 <script type="text/javascript">
     function responseById(messageId) {
-        window.location.href='${pageContext.request.contextPath}/responseByIdUI?id='+messageId;
+        window.location.href='${pageContext.request.contextPath}/teacherResponseById?messageId='+messageId;
 
     }
 </script>

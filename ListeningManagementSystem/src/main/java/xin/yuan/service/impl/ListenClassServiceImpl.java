@@ -45,4 +45,9 @@ public class ListenClassServiceImpl implements ListenClassService {
     public List<ListenClass> findTeacherListensByName2(String teaName) {
         return listenClassDao.findTeacherListensByName2(teaName);
     }
+
+    @Override
+    public void updateListenById(int id) {
+        listenClassDao.updateListenById(id);
+    }
 }

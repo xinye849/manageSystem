@@ -14,4 +14,6 @@ public interface MessageService {
     void replayMessage(Message message);
 
     PageModel findAllMessages(int currentNum);
+
+    Message teacherResponseById(Message message);
 }

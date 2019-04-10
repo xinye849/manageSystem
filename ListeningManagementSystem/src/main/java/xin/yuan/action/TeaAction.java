@@ -9,12 +9,15 @@ import org.apache.struts2.ServletActionContext;
 import xin.yuan.entity.Student;
 import xin.yuan.entity.Teacher;
 import xin.yuan.service.TeaService;
+import xin.yuan.utils.Md5Encode;
 import xin.yuan.utils.PageModel;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,7 +51,11 @@ public class TeaAction extends ActionSupport implements ModelDriven {
     }
 
 
-    public String teaLogin() {
+    public String teaLogin() throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        //进行md5加密
+        String md5Psw = Md5Encode.encodeByMd5(teacher.getTeaPassword());
+        teacher.setTeaPassword(md5Psw);
+
         Teacher tea = teaService.teaLogin(teacher);
         if (tea == null) {
             HttpServletRequest request = ServletActionContext.getRequest();
@@ -101,7 +108,10 @@ public class TeaAction extends ActionSupport implements ModelDriven {
     }
 
     //添加老师
-    public String addTeacher() {
+    public String addTeacher() throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        //进行md5加密
+        String md5Psw = Md5Encode.encodeByMd5(teacher.getTeaPassword());
+        teacher.setTeaPassword(md5Psw);
 
 
         Teacher tea = teaService.findTeacherWithOne(teacher);
@@ -163,7 +173,11 @@ public class TeaAction extends ActionSupport implements ModelDriven {
         return SUCCESS;
     }
 
-    public String updateTeacher() {
+    public String updateTeacher() throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        //进行md5加密
+        String md5Psw = Md5Encode.encodeByMd5(teacher.getTeaPassword());
+        teacher.setTeaPassword(md5Psw);
+
         teaService.updateTeacher(teacher);
         ServletActionContext.getRequest().setAttribute("msg", "修改成功");
 
